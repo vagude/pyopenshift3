@@ -15,6 +15,13 @@ def saveInMongo():
     username = os.getenv('MONGO_USERNAME')
     password = os.getenv('MONGO_PASSWORD')
     db = os.getenv('MONGO_SCHEMA')
+
+    #mongodb://root:pass@localhost:27017/
+    conn = MongoClient('mongodb://{}:{}@{}:{}/'.formart(username, password, host, port))
+    db = conn['{}'.format(db)]
+    coll = db['employee']
+    coll.save({"_id" : 1, "name" : "Vamsi", "address" : "San Jose"})
+
     return "{} - {} - {} - {} - {}".format(host, port, username, password, db)
 
 
