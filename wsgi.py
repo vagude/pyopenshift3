@@ -20,9 +20,9 @@ def saveInMongo():
     conn = MongoClient('mongodb://{}:{}@{}:{}/'.format(username, password, host, port))
     db = conn['{}'.format(db)]
     coll = db['employee']
-    coll.save({"_id" : 1, "name" : "Vamsi", "address" : "San Jose"})
+    inserted_id = coll.insert_one({ "name" : "Vamsi", "address" : "San Jose"}).inserted_id
 
-    return "{} - {} - {} - {} - {}".format(host, port, username, password, db)
+    return "Inserted ID: {}".format(inserted_id)
 
 
 if __name__ == "__main__":
